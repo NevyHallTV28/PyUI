@@ -16,11 +16,9 @@ class Screen:
         #]
         pass
 
-    def update(self):
-        self.elementsToDisplay()
-
 
     def display(self):
+        self.elementsToDisplay()
         for e in self.elements:
             e.display(self.surface)
         

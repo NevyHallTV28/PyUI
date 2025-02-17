@@ -20,5 +20,4 @@ while True: ##Game loop
     ##----------------------------------------------------
 
     window.checkForInput(screen) #checks for inputs on the screen
-    screen.update() #updates the screen
     window.update(screen) #updates the window to reflect the new screen
