@@ -59,13 +59,19 @@ class Label(PageElement):
     def __init__(self, topLeftLoc, width, height, text, fontSize=14, textColorRGB=(0,0,0)):
         super().__init__(topLeftLoc, width, height, None)
         pygame.font.init()
-        self.text = text
+        textPieces = text.split("\n")
         font = pygame.font.Font('freesansbold.ttf', fontSize)
-        self.textSurf = font.render(self.text, True, textColorRGB)
-        #center the text in the box
-        textRect = self.textSurf.get_rect()
-        textRect.center = (self.rect[0] + width / 2, self.rect[1] + height / 2)
-        self.textRect = textRect
+        self.textSurfs = []
+        self.textRects = []
+        
+        for line in textPieces:
+            textSurf = font.render(line, True, textColorRGB)
+            #center the text in the box
+            textRect = textSurf.get_rect()
+            textRect.center = (self.rect[0] + width / 2, self.rect[1] + height / 2)
+
+            self.textSurfs.append(textSurf)
+            self.textRects.append(textRect)
 
     def display(self, surface):
         surface.blit(self.textSurf, self.textRect)
