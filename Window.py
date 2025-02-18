@@ -22,6 +22,7 @@ class Window:
 
         else:
             self.screen.fill(self.color)
+        screenObj.display()
         pygame.display.flip()
 
     def checkForInput(self, screen):
