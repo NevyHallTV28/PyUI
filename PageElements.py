@@ -1,6 +1,7 @@
 from pygame import Rect
 import pygame
 from os import getcwd
+from math import floor
 
 class PageElement:
     def __init__(self, topLeftLoc, width, height, colorRGB=(255,255,255)):
@@ -58,23 +59,36 @@ class Image(PageElement):
 class Label(PageElement):
     def __init__(self, topLeftLoc, width, height, text, fontSize=14, textColorRGB=(0,0,0)):
         super().__init__(topLeftLoc, width, height, None)
+
+        #create font object to render text
         pygame.font.init()
-        textPieces = text.split("\n")
         font = pygame.font.Font('freesansbold.ttf', fontSize)
+        
+        
+        #identify center location of top label within given box
+        textPieces = text.split("\n")
+        horizMid = self.rect[0] + width / 2
+        vertMid = self.rect[1] + height / 2
+        vertTop = vertMid - fontSize * floor(len(textPieces)/2)
+        if len(textPieces) % 2 == 0:
+            vertTop += fontSize / 2
+
+        #start to place lines of text
         self.textSurfs = []
         self.textRects = []
-        
         for line in textPieces:
             textSurf = font.render(line, True, textColorRGB)
             #center the text in the box
             textRect = textSurf.get_rect()
-            textRect.center = (self.rect[0] + width / 2, self.rect[1] + height / 2)
+            textRect.center = (self.rect[0] + width / 2, vertTop)
+            vertTop += fontSize
 
             self.textSurfs.append(textSurf)
             self.textRects.append(textRect)
 
     def display(self, surface):
-        surface.blit(self.textSurf, self.textRect)
+        for i in range(len(self.textSurfs)):
+            surface.blit(self.textSurfs[i], self.textRects[i])
 
         
     
