@@ -35,7 +35,8 @@ class Window:
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 clickLoc = pygame.mouse.get_pos()
-                for e in screen.elements:
+                for e in screen.elements[::-1]:
                     if e.wasClicked(clickLoc):
                         e.onClick(screen)
+                        return
 
