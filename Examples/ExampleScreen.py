@@ -2,7 +2,7 @@ from PyUI.Screen import Screen #will need a screen object to extend
 from PyUI.PageElements import * #will need the base element classes to extend
 
 ##create the custom screen class
-class ExampleScreen(Screen):
+class StartScreen(Screen):
     def __init__(self, window):
         super().__init__(window, (0,0,0)) ##use the parents constructor
         ##give the screen a state for updating values and labels----

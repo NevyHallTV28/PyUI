@@ -7,14 +7,14 @@ class Screen:
         self.state = {}
 
     def elementsToDisplay(self):
-        #override this with the elements to render
-        #attach the elements as a list to the screen object
-        #example:
-        #self.elements = [
-            #Button(),
-            #Label()
-        #]
+        self.elements = []
+    pass
+    
+    def elementsToDisplay(self):
         pass
+
+    def update(self):
+        self.elementsToDisplay()
 
 
     def display(self):
